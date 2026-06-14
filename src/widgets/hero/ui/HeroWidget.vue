@@ -24,7 +24,7 @@ import profileImage from '@shared/assets/images/profile/profile.jpg'
         download="Nikita-Skvirskii-CV.docx"
         class="hero__cv"
         size="md"
-        variant="dark"
+        variant="light"
       >
         Скачать резюме
         <template #iconRight>
