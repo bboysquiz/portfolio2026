@@ -1,0 +1,97 @@
+import type { SkillGroup } from './types'
+
+export const skillGroups: SkillGroup[] = [
+  {
+    id: 'languages',
+    title: 'Языки',
+    skills: [
+      { name: 'JavaScript', isPrimary: true },
+      { name: 'TypeScript', isPrimary: true },
+      { name: 'QML'},
+      { name: 'PHP'},
+      { name: 'GraphQL'}
+    ],
+  },
+  {
+    id: 'frameworks',
+    title: 'Фреймворки и платформы',
+    skills: [
+      { name: 'Vue 3', isPrimary: true },
+      { name: 'Quasar', isPrimary: true },
+      { name: 'Nuxt', isPrimary: true },
+      { name: 'Svelte 5' },
+      { name: 'SvelteKit 2'},
+      { name: 'React' },
+      { name: 'React Native'},
+      { name: 'Node.js' },
+    ],
+  },
+  {
+    id: 'architecture',
+    title: 'Архитектура и UI-инжиниринг',
+    skills: [
+      { name: 'FSD-архитектура', isPrimary: true },
+      { name: 'Микрофронтенд архитектура "Module Federation"'},
+      { name: 'Оптимизация и настройка сборки' },
+    ],
+  },
+
+  {
+    id: 'web',
+    title: 'Веб-технологии',
+    skills: [
+      { name: 'HTML5', isPrimary: true },
+      { name: 'CSS3', isPrimary: true },
+      { name: 'SCSS' },
+      { name: 'SASS' },
+      { name: 'PostCSS' },
+      { name: 'Home Assistant/Lovelace' },
+      { name: 'WordPress' },
+      { name: 'Tailwind CSS3' },
+    ],
+  },
+  {
+    id: 'tools',
+    title: 'Инструменты',
+    skills: [
+      { name: 'Git', isPrimary: true },
+      { name: 'Vite', isPrimary: true },
+      { name: 'Webpack', isPrimary: true },
+      { name: 'DevTools', isPrimary: true },
+      { name: 'ESLint', isPrimary: true },
+      { name: 'Swagger / OpenAPI', isPrimary: true },
+      { name: 'Babel' },
+      { name: 'Gulp' },
+      { name: 'Postman' },
+      { name: 'Docker'},
+      { name: 'Vitest' },
+      { name: 'CI/CD' },
+      { name: 'Husky' },
+      { name: 'Prettier' },
+      { name: 'Puppeteer' },
+      { name: 'Svelte-check'},
+    ],
+  },
+  {
+    id: 'libraries',
+    title: 'Фронтенд-библиотеки и стейт менеджеры',
+    skills: [
+      { name: 'Pinia', isPrimary: true },
+      { name: 'Vue Router', isPrimary: true },
+      { name: 'Vuex' },
+      { name: 'Redux Toolkit' },
+      { name: 'Svelte stores' },
+      { name: 'Chart.js' },
+      { name: 'Cropper.js' },
+      { name: 'Dexie' },
+      { name: 'Vue Apollo' },
+      { name: 'LitElement' },
+      { name: 'GSAP' },
+      { name: 'Leaflet'},
+      { name: 'MiniSearch' },
+      { name: 'jQuery' },
+      { name: 'Date-picker-svelte'},
+      { name: 'Svelte-paginate'},
+    ],
+  },
+]
