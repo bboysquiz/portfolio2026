@@ -184,7 +184,7 @@ import profileImage from '@shared/assets/images/profile/profile.jpg'
   }
 
   .hero__media {
-    justify-content: flex-end;
+    justify-content: center;
   }
 
   .hero__media img {
