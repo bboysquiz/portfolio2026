@@ -11,6 +11,7 @@ export type ProjectParallaxDetail = {
   alt: string
   className: string
   speed: number
+  compactSpeed?: number
 }
 
 export type ProjectResponsiveCover = {

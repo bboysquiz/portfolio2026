@@ -63,6 +63,7 @@ export const projects: Project[] = [
         alt: '',
         className: 'project-card__parallax-detail--crm-dance',
         speed: -122,
+        compactSpeed: -81,
       },
       {
         src: crmDetailUser,

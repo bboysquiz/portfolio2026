@@ -8,7 +8,7 @@ import {
   type CSSProperties,
 } from 'vue'
 import { UiBadge, UiButton, UiCard } from '@shared/ui'
-import type { Project, ProjectLink, ProjectStatus } from '../model/types'
+import type { Project, ProjectLink, ProjectParallaxDetail, ProjectStatus } from '../model/types'
 
 type ProjectCardProps = {
   project: Project
@@ -41,9 +41,14 @@ const projectLinks = computed(() =>
 const previewTitleLines = computed(() => props.project.previewTitleLines ?? [props.project.title])
 const cardComponent = ref<ComponentPublicInstance | null>(null)
 const parallaxProgress = ref(0)
+const isCompactViewport = ref(false)
 const hasParallaxDetails = computed(() => Boolean(props.project.parallaxDetails?.length))
 
 let animationFrame = 0
+
+const updateViewportMode = () => {
+  isCompactViewport.value = window.innerWidth <= 900
+}
 
 const updateParallaxProgress = () => {
   const cardElement = cardComponent.value?.$el as HTMLElement | undefined
@@ -66,19 +71,27 @@ const queueParallaxUpdate = () => {
 
   animationFrame = window.requestAnimationFrame(() => {
     animationFrame = 0
+    updateViewportMode()
     updateParallaxProgress()
   })
 }
 
-const getParallaxDetailStyle = (speed: number): CSSProperties => ({
-  transform: `translate3d(0, ${(parallaxProgress.value * speed).toFixed(2)}px, 0)`,
-})
+const getParallaxDetailStyle = (detail: ProjectParallaxDetail): CSSProperties => {
+  const speed = isCompactViewport.value && detail.compactSpeed !== undefined
+    ? detail.compactSpeed
+    : detail.speed
+
+  return {
+    transform: `translate3d(0, ${(parallaxProgress.value * speed).toFixed(2)}px, 0)`,
+  }
+}
 
 onMounted(() => {
   if (!hasParallaxDetails.value) {
     return
   }
 
+  updateViewportMode()
   updateParallaxProgress()
   window.addEventListener('scroll', queueParallaxUpdate, { passive: true })
   window.addEventListener('resize', queueParallaxUpdate)
@@ -151,7 +164,7 @@ onBeforeUnmount(() => {
         :class="detail.className"
         :src="detail.src"
         :alt="detail.alt"
-        :style="getParallaxDetailStyle(detail.speed)"
+        :style="getParallaxDetailStyle(detail)"
       />
     </div>
 
@@ -373,7 +386,7 @@ p, .project-card__description {
 
 .project-card--opshub {
   --ui-card-accent-glow: radial-gradient(circle at 18% 12%, #f04434, transparent 40%);
-  --project-cover-position: top left;
+  --project-cover-position: top center;
 }
 
 .project-card.project-card--opshub {
@@ -648,7 +661,6 @@ p, .project-card__description {
   .project-card__parallax-detail--crm-dance {
     top: 23%;
     left: 35%;
-    width: 47%;
   }
 
   .project-card__parallax-detail--crm-user {
@@ -660,7 +672,6 @@ p, .project-card__description {
   .project-card__parallax-detail--crm-account {
     top: 15%;
     right: -18%;
-    width: 46%;
   }
 
   .project-card__parallax-detail--opshub-filters {
@@ -733,6 +744,77 @@ p, .project-card__description {
     top: 29%;
     right: -17%;
     width: 50%;
+  }
+}
+
+@media (max-width: 900px) {
+  .project-card__parallax-detail--crm-user,
+  .project-card__parallax-detail--opshub-work,
+  .project-card__parallax-detail--interviewer-questions,
+  .project-card__parallax-detail--vision-product {
+    display: none;
+  }
+
+  .project-card__parallax-detail--crm-account {
+    top: 4%;
+    right: 1%;
+  }
+
+  .project-card__parallax-detail--crm-dance {
+    top: 17%;
+    left: 63%;
+  }
+
+  .project-card__parallax-detail--crm-subscription {
+    top: 10%;
+  }
+
+  .project-card__parallax-detail--opshub-filters {
+    top: 2%;
+    right: 2%;
+    width: 22%;
+  }
+
+  .project-card__parallax-detail--opshub-new-ticket {
+    top: 8%;
+    right: 5%;
+    width: 30%;
+  }
+
+  .project-card__parallax-detail--opshub-resolved {
+    top: 16%;
+    left: 31%;
+    width: 26%;
+  }
+
+  .project-card__parallax-detail--interviewer-repeat {
+    top: -1%;
+    left: 71%;
+    width: 27%;
+  }
+
+  .project-card__parallax-detail--interviewer-knowledge {
+    top: 9%;
+    left: 75%;
+    width: 27%;
+  }
+
+  .project-card__parallax-detail--vision-cart {
+    top: 6%;
+    left: 22%;
+    width: 20%;
+  }
+
+  .project-card__parallax-detail--vision-category {
+    top: 6%;
+    right: 1%;
+    width: 21%;
+  }
+
+  .project-card__parallax-detail--vision-guarantee {
+    top: 18%;
+    right: 3%;
+    width: 26%;
   }
 }
 
