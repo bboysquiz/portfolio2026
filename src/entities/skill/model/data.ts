@@ -80,6 +80,7 @@ export const skillGroups: SkillGroup[] = [
       { name: 'Vue Router', isPrimary: true },
       { name: 'Vuex' },
       { name: 'Redux Toolkit' },
+      { name: 'Redux Saga' },
       { name: 'Svelte stores' },
       { name: 'Chart.js' },
       { name: 'Cropper.js' },

@@ -24,6 +24,13 @@ const projectLinks = computed(() => {
     .filter((link): link is ProjectLink => Boolean(link))
 })
 
+const descriptionParagraphs = computed(() =>
+  props.project.fullDescription
+    .split(/\n{2,}/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean),
+)
+
 const modalTitleId = computed(() => `project-modal-title-${props.project.id}`)
 
 let previousBodyOverflow = ''
@@ -82,7 +89,19 @@ onBeforeUnmount(() => {
             <h3 :id="modalTitleId">{{ project.title }}</h3>
           </div>
 
-          <p class="project-modal__description">{{ project.fullDescription }}</p>
+          <div class="project-modal__description">
+            <p
+              v-for="(paragraph, index) in descriptionParagraphs"
+              :key="paragraph"
+              :class="{
+                'project-modal__description-paragraph--lead':
+                  ['selena-crm', 'opshub', 'interviewer', 'vision-air'].includes(project.id) &&
+                  index === 0,
+              }"
+            >
+              {{ paragraph }}
+            </p>
+          </div>
 
           <div v-if="projectLinks.length" class="project-modal__links">
             <UiButton
@@ -245,11 +264,22 @@ onBeforeUnmount(() => {
 
 .project-modal__description {
   max-width: 760px;
+  display: grid;
+  gap: var(--space-md);
+}
+
+.project-modal__description p {
   margin: 0;
   color: var(--color-text-soft);
   font-size: 16px;
   font-weight: 500;
   line-height: 1.6;
+  white-space: pre-line;
+}
+
+.project-modal__description-paragraph--lead {
+  color: var(--color-text);
+  font-weight: 800;
 }
 
 .project-modal__links {

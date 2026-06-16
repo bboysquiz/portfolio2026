@@ -43,7 +43,7 @@ const primarySkills = computed(() =>
             v-for="group in skillGroups"
             :key="group.id"
             class="skills__group"
-            :variant="group.id === 'architecture' ? 'warm' : 'default'"
+            variant="default"
             padding="lg"
           >
             <div class="skills__group-heading">
@@ -105,7 +105,8 @@ const primarySkills = computed(() =>
   line-height: 0.95;
   letter-spacing: 0;
   color: var(--color-text);
-  overflow-wrap: anywhere;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .skills__intro p {
@@ -263,9 +264,25 @@ const primarySkills = computed(() =>
 }
 
 @media (max-width: 620px) {
+  .skills__intro {
+    display: grid;
+    justify-content: stretch;
+    align-items: start;
+    gap: var(--space-md);
+    margin-bottom: clamp(var(--space-xl), 10vw, var(--space-2xl));
+  }
+
   .skills__intro h2 {
-    font-size: clamp(36px, 10.5vw, 42px);
-    line-height: 1;
+    max-width: 100%;
+    font-size: clamp(28px, 8vw, 34px);
+    line-height: 1.08;
+  }
+
+  .skills__intro p {
+    max-width: 100%;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.65;
   }
 
   .skills__core-list,
